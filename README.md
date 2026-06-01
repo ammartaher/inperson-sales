@@ -1,5 +1,7 @@
 # inperson
 
+[![skills.sh](https://skills.sh/b/ammartaher/inperson-sales)](https://skills.sh/ammartaher/inperson-sales)
+
 A Claude Code skill that plans and runs a **physical / in-person cold-outreach** campaign for any B2B SaaS — walks you through targeting → per-target branded artefacts → a clustered driving route, then packages everything ready to print and drive.
 
 ```
