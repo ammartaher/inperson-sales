@@ -1,0 +1,10 @@
+{
+  "name": "inperson",
+  "description": "Physical/in-person cold-outreach campaign generator for B2B SaaS — generates per-target branded artefacts (rebrands the SaaS's own output to look like each prospect's), geographic clusters, Google Maps routes, and a Google My Maps KML, then packages everything ready to print and drive.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ammar Taher"
+  },
+  "repository": "https://github.com/ammartaher/inperson-plugin",
+  "license": "MIT"
+}
