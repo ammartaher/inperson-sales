@@ -82,7 +82,7 @@ Distilled from a 9-day revenue sprint for [KLARO](https://tryklaro.app) — the 
 
 ## Author
 
-Built by **[Ammar Taher](https://www.linkedin.com/in/ammartaher)** — founder of [KLARO](https://tryklaro.app). Reach out on LinkedIn if you adapt this for your SaaS or want to swap notes on physical outreach.
+Built by **[Ammar Taher](https://www.linkedin.com/in/amtaher)** — founder of [KLARO](https://tryklaro.app). Reach out on LinkedIn if you adapt this for your SaaS or want to swap notes on physical outreach.
 
 ## License
 
