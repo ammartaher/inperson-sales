@@ -1,80 +1,92 @@
 # inperson
 
-A Claude Code skill that plans and executes a **physical / in-person cold-outreach campaign** for a B2B SaaS.
+A Claude Code skill that plans and runs a **physical / in-person cold-outreach** campaign for any B2B SaaS — walks you through targeting → per-target branded artefacts → a clustered driving route, then packages everything ready to print and drive.
 
-You walk into prospect offices with **branded printed artefacts** (offertes, proposals, sample reports) that look like they came out of *that prospect's own* account on your SaaS, then drive a Google Maps route around them clustered by neighbourhood.
+```
+/inperson
+```
 
-Invoke with `/inperson` (personal install) or `/inperson:inperson` (plugin install).
+## What you get
 
-## What it does
+Run the skill in any project, answer a handful of questions, and you end up with:
 
-Given:
-- Your SaaS (one-liner + where its per-customer template lives in your codebase).
-- Your ICP (industry, size, region, behavioural triggers).
-- Your salesperson contact (name, phone, landing URL).
-- One real sample artefact from your SaaS (e.g. a quote ID + tenant ID — must be a **dev tenant**).
+- **A list of 20–50 prospects** in your target region, researched from the web + any CSV / Notion / CRM you have.
+- **One branded PDF per prospect** that looks like it came out of *their own* account on your SaaS — their logo, their colours, their company name on it. With a short "made by us, call X for a demo" CTA at the end.
+- **Geographic clusters** — all prospects grouped into 5–10 driving areas so you do one neighbourhood per trip.
+- **A clusters page** with one big "Open in Google Maps" button per cluster, plus links to print each prospect's PDF.
+- **A Google My Maps KML** — import once, get all prospects as colour-coded pins, accessible from the Google Maps app on your phone.
 
-The skill produces, in `<your-project>/inperson/`:
-- `companies.json` — canonical list of 20–50 targets (researched from web + CSVs + connected CRMs).
-- `out/<cluster>/<slug>.<ext>` — one rebranded artefact per target, grouped by area.
-- `clusters.html` — one-page index. Each cluster has a green button that opens its Google Maps route.
-- `pins.kml` — import to [Google My Maps](https://www.google.com/maps/d/) for one custom map with all targets as pins, colour-coded by cluster, accessible from the Google Maps app on your phone.
+Here's what the clusters page looks like:
 
-You print the PDFs for one cluster, open that cluster's route, drive, hand them over.
+![Cluster index — one section per area, with an "Open in Google Maps" button and a list of stops](docs/screenshots/clusters-html.png)
 
-## The five phases
+Each green button opens a real driving route in Google Maps with all stops in that cluster pre-filled. Each `.pdf` link opens the branded artefact for that prospect, ready to print.
 
-1. **Intake** — 10 diagnostic questions to learn the campaign.
-2. **Targets** — find prospects via web research, CSV ingest, or connected MCPs (Notion / Linear / HubSpot).
-3. **Customise** — discover your SaaS's per-customer template, build a per-target branding pack (logo, accent colour, company details), write a rebrand engine script.
-4. **Route** — cluster by area, TSP-optimise routes ≤8 stops, build Google Maps URLs and KML.
-5. **Package** — final folder layout, gitignore, handoff message.
-
-Full details in [`skills/inperson/SKILL.md`](skills/inperson/SKILL.md) and the phase files alongside it.
+---
 
 ## Install
 
-### Personal use (zero-effort)
+Pick the one that matches you.
 
-Copy the skill into your user-scope skills directory:
+### 👶 No-terminal install (easiest — for non-developers)
 
-```bash
-# macOS / Linux
-mkdir -p ~/.claude/skills/inperson
-cp -r skills/inperson/* ~/.claude/skills/inperson/
+You just need to drop one folder into the right place on your computer. No commands.
 
-# Windows PowerShell
-New-Item -ItemType Directory -Force "$HOME\.claude\skills\inperson" | Out-Null
-Copy-Item .\skills\inperson\* "$HOME\.claude\skills\inperson\" -Force
+1. **Download the skill.** On this GitHub page, click the green **`Code`** button (top right) → **`Download ZIP`**. Unzip wherever (usually goes to your Downloads folder).
+2. **Open the Claude skills folder.**
+   - **Windows**: open File Explorer, click the address bar, paste this, press Enter:
+     ```
+     %USERPROFILE%\.claude\skills
+     ```
+     (Creates the folder if it doesn't exist.)
+   - **Mac**: in Finder press `Cmd + Shift + G`, paste this, press Enter:
+     ```
+     ~/.claude/skills
+     ```
+3. **Drag the `skills/inperson` folder** from the unzipped repo *into* the skills folder you just opened. (Only the `inperson` folder — not the whole repo.)
+4. **Restart Claude Code** (close + reopen), or in a running session type `/reload-plugins`.
+5. **Type `/inperson`** in any project — it'll walk you through the rest.
+
+### ⚡ One-line install (any AI coding agent)
+
+If you're comfortable opening a terminal, this installs it cross-agent (Claude Code, Cursor, GitHub Copilot, Codex, Gemini, Cline, and others), via [skills.sh](https://skills.sh):
+
+```
+npx skills add ammartaher/inperson-sales
 ```
 
-Then in any Claude Code session: `/inperson` — Claude walks you through it.
+### 🔧 Developer install (Claude Code plugin mode)
 
-### As a plugin (for sharing across team)
+Load directly from this repo without installing — useful for testing the latest commit:
 
-This repo is already a valid Claude Code plugin (has `.claude-plugin/plugin.json` + `skills/`).
-
-Run Claude Code with `--plugin-dir` pointing at this repo:
-
-```bash
-claude --plugin-dir /path/to/inperson-plugin
+```
+claude --plugin-dir https://github.com/ammartaher/inperson-sales
 ```
 
-Then `/inperson:inperson` becomes available in every session.
+Then in your session: `/inperson-sales:inperson`.
 
-### Via the Claude marketplace (public)
+---
 
-Submit this GitHub repo at <https://claude.ai/settings/plugins/submit>. Once approved, anyone can install via marketplace.
+## The five phases the skill walks you through
+
+1. **Intake** — 10 quick questions: what your SaaS is, your ideal customer, your region, your phone number.
+2. **Targets** — finds 20–50 prospects via web search + any CSV / Notion / CRM you provide.
+3. **Customise** — finds your SaaS's per-customer template, builds a branding pack per target, writes a small script that rebrands and exports one artefact per prospect.
+4. **Route** — groups prospects into driving clusters, builds Google Maps routes + a KML for Google My Maps.
+5. **Package** — drops everything into `<your-project>/inperson/`, ready to print.
+
+Full phase details live in the [skill files](skills/inperson/).
+
+---
 
 ## Honest things to know
 
-- **~15% of B2B sites** have logos that can't be auto-fetched (inline base64, white-only on transparent, behind a CDN with weird query params). The skill renders the artefact without a logo and flags those targets — it never blocks the run.
-- **Strictly sequential rebrands.** Per-tenant template columns aren't versioned in any SaaS we've seen — parallel rebrands bleed branding between targets. The engine loop is `for…await…`, never `Promise.all`.
-- **Always restores tenant state.** The engine backs up the tenant's template *once* before any write, and restores at the end. There's a `--restore` flag if anything goes sideways.
-- **Dev tenant only.** The skill confirms the tenant/org-ID you supply is internal/dev before touching it. Never run this on a production customer's data.
-- **Google Maps "Reorder stops" is mobile-only** on the consumer Google Maps web UI. For clusters > 8 stops where TSP brute-force isn't applied, you reorder in the Maps app on your phone.
-- **`.html` over `.url`** for one-click route opens — Windows `.url` Internet Shortcuts often open as plain text in Chrome under common file-association states.
-- **Real-customer CTA gate.** If you add a "made by us, call X for a demo" CTA to your SaaS's template (recommended), gate it behind an opt-in field so real customers' artefacts never carry it.
+- **~15% of B2B sites** have logos that can't be auto-fetched (inline base64, white-only on transparent, behind a CDN with weird query params). The skill renders the artefact without a logo and flags those — it never blocks the run.
+- **The skill writes to your SaaS's dev/internal tenant only.** It backs up the tenant's template before any write and restores it at the end. There's a safety check before it touches anything.
+- **The salesperson CTA on the artefact is gated behind an opt-in template field**, so your *real* paying customers' artefacts never carry "made by us, call X" — only the ones generated by this skill do.
+- **Google Maps "Reorder stops" is mobile-only** on the web UI. For clusters of more than 8 stops, the skill ships a path-format URL you can hit `Reorder` on in the Google Maps app.
+
+---
 
 ## Origin
 
