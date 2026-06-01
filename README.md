@@ -80,6 +80,10 @@ Submit this GitHub repo at <https://claude.ai/settings/plugins/submit>. Once app
 
 Distilled from a 9-day revenue sprint for [KLARO](https://tryklaro.app) — the AI office for Dutch construction contractors. The original sprint generated 39 branded offertes for Utrecht-area contractors, clustered them into 8 driving routes, and packaged everything for a Monday morning blitz. The methodology turned out general enough for any B2B SaaS doing in-person cold outreach, so we extracted it into this skill.
 
+## Author
+
+Built by **[Ammar Taher](https://www.linkedin.com/in/ammartaher)** — founder of [KLARO](https://tryklaro.app). Reach out on LinkedIn if you adapt this for your SaaS or want to swap notes on physical outreach.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
